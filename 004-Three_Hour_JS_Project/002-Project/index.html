@@ -1,0 +1,50 @@
+<!-- Project -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <form onsubmit="submitForm(event)">
+        <label for="price">Choose Price: </label>
+        <input type="text" name="price" id="price" required>
+
+        <label for="dish">Choose Dish: </label>
+        <input type="text" name="dish" id="dish" required>
+
+        <label for="table">Choose a Table: </label>
+        <select id="table">
+            <option value="table-one" selected>Table 1</option>
+            <option value="table-two">Table 2</option>
+            <option value="table-three">Table 3</option>
+        </select>
+
+        <button type="submit">Add to bill</button>
+    </form>
+
+    <h1>Orders</h1>
+
+    <div class="table-one-order">
+        <h2>Table 1</h2>
+        <ul id="table-one-list"></ul>
+    </div>
+
+    <div class="table-two-order">
+        <h2>Table 2</h2>
+        <ul id="table-two-list"></ul>
+    </div>
+
+    <div class="table-three-order">
+        <h2>Table 3</h2>
+        <ul id="table-three-list"></ul>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>
