@@ -6,7 +6,7 @@ function ExpenseItem() {
     const expenseDate = new Date(2023, 7, 15).toISOString();
     const expenseTitle = "Insurance";
     const expenseAmount = 50;
-    const expenseLocation = "Bangalore"
+    const expenseLocation = "Delhi"
 
     return (
         <div className="expense-item">
