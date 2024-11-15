@@ -31,7 +31,7 @@ export const AuthContextProvider = (props) => {
         isLoggedIn: isLoggedIn,
         onLogout: logoutHandler,
         onLogin: loginHandler,
-    }}>props.children</AuthContext.Provider>
+    }}>{props.children}</AuthContext.Provider>
 }
 
 export default AuthContext;
