@@ -1,0 +1,47 @@
+/* NoteSearch.module.css */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+.searchBox {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.searchBox label {
+    font-size: 16px;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.searchBox input {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.infoBox {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.infoBox p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
