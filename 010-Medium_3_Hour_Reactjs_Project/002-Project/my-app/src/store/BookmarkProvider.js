@@ -11,11 +11,11 @@ const bookmarkReducer = (state, action) => {
 			const updatedBookmarks = state.bookmarks.concat(action.bookmark);
 			return { bookmarks: updatedBookmarks };
 		case 'REMOVE':
-			const filteredBookmarks = state.bookmarks.filter(bookmark => bookmark.id !== action.id);
+			const filteredBookmarks = state.bookmarks.filter(bookmark => bookmark._id !== action.id);
 			return { bookmarks: filteredBookmarks };
 		case 'UPDATE':
 			const updatedBookmarkList = state.bookmarks.map(bookmark =>
-				bookmark.id === action.bookmark.id ? action.bookmark : bookmark
+				bookmark._id === action.bookmark._id ? action.bookmark : bookmark
 			);
 			return { bookmarks: updatedBookmarkList };
 		case 'SET':
@@ -37,7 +37,7 @@ function BookmarkProvider(props) {
 	};
 
 	const updateBookmarkHandler = (bookmark) => {
-		dispatchBookmarkAction({ type: 'UPDATE', bookmark });
+		dispatchBookmarkAction({ type: 'UPDATE', bookmark: bookmark });
 	};
 
 	const setBookmarksHandler = (bookmarks) => {

@@ -2,10 +2,11 @@ import React from "react";
 import classes from "./BookmarkList.module.css";
 
 function BookmarkList({ bookmarks, onDelete, onEdit }) {
+  const heading = <h2>Bookmarks</h2>;
   if (bookmarks.length === 0) {
     return (
       <div className={classes.bookmarkList}>
-        <h2>Bookmarks</h2>
+        {heading}
         <p>No bookmarks available.</p>
       </div>
     );
@@ -13,7 +14,7 @@ function BookmarkList({ bookmarks, onDelete, onEdit }) {
 
   return (
     <div className={classes.bookmarkList}>
-      <h2>Bookmarks</h2>
+      {heading}
       <ul>
         {bookmarks.map(({ _id, title, link }) => (
           <li key={_id} className={classes.bookmarkItem}>

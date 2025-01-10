@@ -6,28 +6,26 @@ import BookmarkContext from "./store/bookmark-context.js";
 import AddBookmarkModal from './components/Modals/AddBookmarkModal.js';
 import BookmarkList from './components/BookmarkList.js';
 
-const apiUrl = "https://crudcrud.com/api/97fa5a68ad1842b4ae71d9c45b3498d9/bookmarks";
+const apiUrl = "https://crudcrud.com/api/81773e9d1a30448eb2850fc75782ed52/bookmarks";
 
 function App() {
   const bookmarkCtx = useContext(BookmarkContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingBookmark, setEditingBookmark] = useState(null);
+  const [isDataFetched, setIsDataFetched] = useState(false);
 
-  const handleApiError = (error, message) => {
-    console.error(message, error);
-    alert(message);
-  };
 
   const fetchBookmarks = useCallback(async () => {
-    if (bookmarkCtx.bookmarks.length === 0) {
+    if (!isDataFetched) {
       try {
         const response = await axios.get(apiUrl);
         bookmarkCtx.setBookmarks(response.data);
+        setIsDataFetched(true);
       } catch (error) {
-        handleApiError(error, "Error loading bookmarks:");
+        alert();
       }
     }
-  }, [bookmarkCtx]);
+  }, [bookmarkCtx, isDataFetched]);
 
   useEffect(() => {
     fetchBookmarks();
@@ -41,7 +39,7 @@ function App() {
       await axios.delete(`${apiUrl}/${id}`);
       bookmarkCtx.removeBookmark(id);
     } catch (error) {
-      handleApiError(error, "Error deleting bookmark:");
+      alert();
     }
   }, [bookmarkCtx]);
 
@@ -51,10 +49,14 @@ function App() {
     openModalHandler();
   };
 
-  const handleAddBookmark = useCallback(async (newBookmark) => {
+  const handleAddBookmark = useCallback(async (newBookmark, id) => {
+    console.log(newBookmark);
     try {
       if (editingBookmark) {
-        await axios.put(`${apiUrl}/${newBookmark._id}`, newBookmark);
+        await axios.put(`${apiUrl}/${newBookmark._id}`, {
+          title: newBookmark.title,
+          link: newBookmark.link
+        });
         bookmarkCtx.updateBookmark(newBookmark);
       } else {
         const response = await axios.post(apiUrl, newBookmark);
@@ -64,7 +66,7 @@ function App() {
       closeModalHandler();
       setEditingBookmark(null);
     } catch (error) {
-      handleApiError(error, "Error saving bookmark:");
+      alert();
     }
   }, [editingBookmark, bookmarkCtx]);
 

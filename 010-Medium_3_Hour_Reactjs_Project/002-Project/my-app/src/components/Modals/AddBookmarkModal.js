@@ -15,14 +15,14 @@ function AddBookmarkModal({ onClose, onAddBookmark, initialBookmark }) {
   const formSubmitHandler = async (event) => {
     event.preventDefault();
     const newBookmark = {
+      ...(initialBookmark && { _id: initialBookmark._id }),
       title: titleRef.current.value,
       link: bookmarkRef.current.value,
     };
 
-    await onAddBookmark(newBookmark);
-
     titleRef.current.value = "";
     bookmarkRef.current.value = "";
+    await onAddBookmark(newBookmark);
   };
 
   return (
