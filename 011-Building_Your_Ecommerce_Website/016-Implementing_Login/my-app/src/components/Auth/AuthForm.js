@@ -3,7 +3,7 @@ import { useState, useRef } from 'react';
 import classes from './AuthForm.module.css';
 
 const AuthForm = () => {
-  const API_KEY = 'AIzaSyDw_Z4NUqrIU9qjX8uY7h-E41ETrni_9sY';
+  const API_KEY = 'fdsffdfdsfdsfdf';
 
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
