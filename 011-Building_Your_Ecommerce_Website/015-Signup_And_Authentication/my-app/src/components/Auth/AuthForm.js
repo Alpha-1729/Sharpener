@@ -4,6 +4,7 @@ import classes from './AuthForm.module.css';
 
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const emailInputRef = useRef('');
   const passwordInputRef = useRef('');
 
@@ -16,7 +17,7 @@ const AuthForm = () => {
 
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
-
+    setIsLoading(true);
     if (isLogin) {
 
     } else {
@@ -31,6 +32,7 @@ const AuthForm = () => {
           'Content-Type': 'application/json'
         }
       }).then(res => {
+        setIsLoading(false);
         if (res.ok) {
           emptyFields();
         } else {
@@ -65,7 +67,7 @@ const AuthForm = () => {
             required
           />
         </div>
-        {!isLogin && (
+        {!isLogin && !isLoading && (
           <button
             type="button"
             onClick={submitHandler}
@@ -74,6 +76,8 @@ const AuthForm = () => {
             Create Account
           </button>
         )}
+
+        {isLoading && <p>Loading</p>}
 
         <div className={classes.actions}>
           <button
