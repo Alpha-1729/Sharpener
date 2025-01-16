@@ -1,0 +1,59 @@
+.navLink {
+    text-decoration: none;
+    margin-right: 10px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.navLink:hover {
+    color: #f8d210;
+    text-decoration: underline;
+}
+
+.active {
+    color: #f8d210;
+    text-decoration: underline;
+}
+
+.cartButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #28a745;
+    border: none;
+    padding: 8px 16px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    border-radius: 4px;
+    margin-right: 10px; /* Spacing between Cart and Logout buttons */
+}
+
+.cartButton:hover {
+    background-color: #218838;
+}
+
+.cartBadge {
+    background-color: #dc3545;
+    margin-left: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.logoutButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #dc3545;
+    border: none;
+    padding: 8px 16px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    border-radius: 4px;
+}
+
+.logoutButton:hover {
+    background-color: #c82333;
+}
