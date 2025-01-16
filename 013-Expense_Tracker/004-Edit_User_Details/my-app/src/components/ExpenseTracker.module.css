@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.profileIncompleteMessage {
+    margin-left: auto;
+    margin-right: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ff6347;
+    /* Red color for attention */
+}
+
+.profileLink {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.profileLink:hover {
+    text-decoration: underline;
+}
