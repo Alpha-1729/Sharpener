@@ -1,0 +1,30 @@
+.card-container {
+    width: 18rem;
+    position: relative;
+}
+
+.card-title {
+    text-align: center;
+    font-weight: bold;
+    padding-top: 10px;
+}
+
+.card-img {
+    padding: 10px;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.card-price {
+    font-weight: bold;
+    color: blue;
+}
+
+.add-to-cart-btn {
+    font-size: 0.9rem;
+}
