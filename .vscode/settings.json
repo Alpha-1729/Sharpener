@@ -1,5 +1,15 @@
 {
     "cSpell.words": [
         "Schitzel"
-    ]
+    ],
+    "files.exclude": {
+        "001-Dom_Manipulation": true,
+        "003-Three_Hour_Project_On_JavaScript": true,
+        "004-Three_Hour_JS_Project": true,
+        "005-Lets_Get_Started_With_React": true,
+        "006-Advance_React": true,
+        "007-Styling_Debugging_And_Life_Cycle_Methods_In_React": true,
+        "008-Basic_3_Hours_React_Js_Project_": true,
+        "009-Creating_A_Restaurant_Website": true,
+    }
 }
