@@ -1,0 +1,43 @@
+.box {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.box h2 {
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.text-danger {
+    color: red;
+    font-size: 14px;
+}
+
+button {
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+button.w-100 {
+    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    .box {
+        padding: 20px;
+    }
+
+    button {
+        font-size: 14px;
+    }
+}
