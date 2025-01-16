@@ -1,0 +1,16 @@
+/* Custom box styling */
+.box {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: -50px;
+    /* Adjust this to move the box up */
+}
+
+/* Heading styling */
+h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+}
