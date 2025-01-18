@@ -1,0 +1,265 @@
+.tableContainer {
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+button {
+    margin: 2px;
+}
+
+.heading {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.noExpenses {
+    font-size: 18px;
+    color: #999;
+    text-align: center;
+}
+
+.expenseTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.expenseTable th,
+.expenseTable td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.expenseTable th {
+    background-color: #f2f2f2;
+}
+
+.expenseTable tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.updateButton,
+.removeButton {
+    padding: 5px 10px;
+    margin: 5px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.updateButton {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.removeButton {
+    background-color: #f44336;
+    color: white;
+}
+
+.updateButton:hover {
+    background-color: #45a049;
+}
+
+.removeButton:hover {
+    background-color: #f2a1a1;
+}
+
+.addButton {
+    padding: 8px 15px;
+    background-color: #008CBA;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.addButton:hover {
+    background-color: #007bb5;
+}
+
+.addButton:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.premiumButton {
+    padding: 8px 15px;
+    background-color: orange;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.premiumButton:hover {
+    background-color: orangered;
+}
+
+.premiumButton:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+.downloadButton {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+    float: right;
+}
+
+.downloadButton:hover {
+    background-color: #45a049;
+}
+
+.light {
+    background-color: white;
+    color: black;
+}
+
+.dark {
+    background-color: #333;
+    color: white;
+}
+
+.themeToggleContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.toggleLabel {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.toggleCheckbox {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggleSlider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 50px;
+}
+
+.toggleSlider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    border-radius: 50px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+}
+
+.toggleCheckbox:checked+.toggleSlider {
+    background-color: #2196F3;
+}
+
+.toggleCheckbox:checked+.toggleSlider:before {
+    transform: translateX(26px);
+}
+
+.toggleSlider:hover {
+    background-color: #aaa;
+}
+
+.toggleLabel span {
+    margin-right: 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+/* Dark Theme Styling */
+.dark .tableContainer {
+    background-color: #2c2c2c;
+    /* Darker background for the container */
+}
+
+.dark .expenseTable {
+    background-color: #444;
+    /* Dark background for the table */
+    color: white;
+    /* White text color */
+}
+
+.dark .expenseTable th {
+    background-color: #555;
+    /* Darker header background */
+    color: white;
+    /* White text color for table headers */
+}
+
+.dark .expenseTable tr:nth-child(even) {
+    background-color: #555;
+    /* Darker alternating rows */
+}
+
+.dark .expenseTable tr:nth-child(odd) {
+    background-color: #444;
+    /* Slightly lighter odd rows */
+}
+
+.dark .updateButton {
+    background-color: #4CAF50;
+    /* Keep button color */
+}
+
+.dark .removeButton {
+    background-color: red;
+    /* Keep button color */
+}
+
+.dark h2 {
+    color: white;
+    /* Keep button color */
+}
+
+.dark .addButton {
+    background-color: #008CBA;
+    /* Keep button color */
+}
+
+.dark .premiumButton {
+    background-color: orange;
+    /* Keep premium button color */
+}
+
+.dark .downloadButton {
+    background-color: #4CAF50;
+    /* Keep download button color */
+}
