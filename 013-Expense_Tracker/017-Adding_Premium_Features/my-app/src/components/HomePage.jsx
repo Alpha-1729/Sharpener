@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { authActions } from "../store/authSlice";
-import FirebaseAuthServices from "../services/firebase/firebaseAuthServices"; // Import the service
-import styles from "./HomePage.module.css"; // Importing the CSS module
+import FirebaseAuthServices from "../services/firebase/firebaseAuthServices";
+import styles from "./HomePage.module.css";
 
 function HomePage() {
     const dispatch = useDispatch();
@@ -15,9 +15,11 @@ function HomePage() {
     const isEmailVerified = useSelector((state) => state.auth.emailVerified);
 
     const [emailVerificationMessage, setEmailVerificationMessage] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const getUserData = async () => {
         if (token) {
+            setLoading(true);
             const { response, error } = await FirebaseAuthServices.getUserDetails(token);
             if (error) {
                 console.error("Error fetching user data:", error);
@@ -27,6 +29,7 @@ function HomePage() {
                     dispatch(authActions.updateEmailVerifiedStatus(response.emailVerified));
                 }
             }
+            setLoading(false);
         }
     };
 
@@ -47,12 +50,18 @@ function HomePage() {
     };
 
     const goToProfile = () => {
-        navigate('/profile'); // Navigate to the profile page
+        navigate('/profile');
     };
 
     useEffect(() => {
-        getUserData();
+        if(isAuthenticated) {
+            getUserData();
+        }
     }, []);
+
+    if (loading) {
+        return <div className={styles.loading}>Loading...</div>;
+    }
 
     return (
         <div className={styles.container}>

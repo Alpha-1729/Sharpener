@@ -140,7 +140,7 @@ function ExpenseTable() {
                 </label>
             }
             {
-                isPremiumActivated &&
+                isPremiumActivated && expenses.length > 0 && 
                 <button
                     className={styles.downloadButton}
                     onClick={handleDownloadCSV}
