@@ -1,0 +1,61 @@
+.inboxContainer {
+    min-height: 100vh; /* Ensure it takes up full screen height */
+    display: flex;
+    flex-direction: column; /* Ensure children are stacked vertically */
+}
+
+
+.heading {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.noEmails {
+    font-size: 16px;
+    color: #888;
+}
+
+.emailRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.emailRow:hover {
+    background-color: #f1f1f1;
+}
+
+.emailLink {
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.emailFrom {
+    font-weight: bold;
+    font-size: 16px;
+    flex: 1;
+}
+
+.emailSnippet {
+    font-size: 14px;
+    color: #666;
+    flex: 2;
+    text-align: left;
+    margin-left: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
