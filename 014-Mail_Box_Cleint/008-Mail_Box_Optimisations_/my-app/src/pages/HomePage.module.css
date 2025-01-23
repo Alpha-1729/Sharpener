@@ -1,0 +1,11 @@
+.layout {
+    display: flex;
+}
+
+.contentArea {
+    margin-left: 250px;
+    /* Adjust this based on the sidebar width */
+    padding: 20px;
+    flex-grow: 1;
+    /* Allow the content area to grow and take the rest of the space */
+}
