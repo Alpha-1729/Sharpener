@@ -1,0 +1,38 @@
+.modalContainer {
+    max-width: 900px;
+    background-color: transparent;
+    border-radius: 8px;
+    box-shadow: none;
+    margin: 0 auto;
+}
+
+.modalHeader {
+    background-color: #007bff;
+    color: white;
+    padding: 15px;
+}
+
+.modalBody {
+    padding: 20px;
+    background-color: transparent;
+}
+
+.modalFooter {
+    background-color: transparent;
+    border-top: none;
+    padding: 10px;
+}
+
+.editorWrapper {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    min-height: 300px;
+    background-color: #fff;
+}
+
+.errorMessage {
+    color: red;
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
