@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ListGroup, Container, Row, Col } from "react-bootstrap";
-import styles from "./InboxPage.module.css";
-import { fetchInboxEmails } from "../store/emailActions"; // Import the getSentEmails function
+import styles from "./OutboxPage.module.css";
+import { fetchOutboxEmails } from "../store/emailActions"; // Adjust the action for fetching outbox emails
 import { useDispatch, useSelector } from "react-redux";
 import { emailActions } from "../store/emailSlice";
 
-const InboxPage = () => {
-    console.log("Inbox page");
-    const [emails, setEmails] = useState([]); // Ensure emails is initialized as an array
+const OutboxPage = () => {
+    console.log("Outbox page");
+    const [emails, setEmails] = useState([]); // Initialize emails as an array
     const [error, setError] = useState(null);
 
     const userEmail = useSelector(state => state.auth.email); // Get user email from Redux store
@@ -17,10 +17,10 @@ const InboxPage = () => {
 
     useEffect(() => {
         const fetchEmails = async () => {
-            const { response, error } = await fetchInboxEmails(userEmail);
+            const { response, error } = await fetchOutboxEmails(userEmail); // Fetch outbox emails
             if (response) {
                 setEmails(response);
-                dispatch(emailActions.setInboxEmails(response));
+                dispatch(emailActions.setOutboxEmails(response));
             } else {
                 setError(error); // Handle error
             }
@@ -30,10 +30,10 @@ const InboxPage = () => {
     }, [userEmail]); // Re-run effect if the userEmail changes
 
     return (
-        <Container className={styles.inboxContainer}>
+        <Container className={styles.outboxContainer}>
             <Row>
                 <Col>
-                    <h2 className={styles.heading}>Inbox</h2>
+                    <h2 className={styles.heading}>Outbox</h2>
                     {error && <p className={styles.error}>{error}</p>}
                     {emails.length === 0 ? (
                         <p className={styles.noEmails}>No emails found.</p>
@@ -44,17 +44,12 @@ const InboxPage = () => {
                                     key={email.id}
                                     className={styles.emailRow}
                                 >
-
                                     <Link
-                                        to={`/inbox/${email.id}`}
+                                        to={`/outbox/${email.id}`}
                                         className={styles.emailLink}
                                     >
-                                        <div className={styles.emailLeft}>
-                                            {/* Blue dot for unread emails */}
-                                            {email.isRead === false && <span className={styles.unreadDot}></span>}
-                                        </div>
-                                        <span className={styles.emailFrom}>
-                                            {email.sender || "Unknown Sender"}
+                                        <span className={styles.emailTo}>
+                                            {email.recipient || "Unknown Recipient"}
                                         </span>
                                         <span className={styles.emailSubject}>
                                             {email.subject || "No Subject"}
@@ -78,4 +73,4 @@ const InboxPage = () => {
     );
 };
 
-export default InboxPage;
+export default OutboxPage;

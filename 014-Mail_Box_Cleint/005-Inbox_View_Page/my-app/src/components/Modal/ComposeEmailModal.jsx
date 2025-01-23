@@ -3,7 +3,7 @@ import { Modal, Button, Form, FloatingLabel } from "react-bootstrap";
 import { EditorState, convertToRaw } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { addSentEmails, addInboxEmails } from "../../store/emailActions";
+import { addEmailToOutbox, addEmailToInbox } from "../../store/emailActions";
 import styles from "./ComposeEmailModal.module.css";
 import { useSelector } from "react-redux";
 import draftToHtml from 'draftjs-to-html';
@@ -34,18 +34,19 @@ function ComposeEmailModal({ show, handleClose }) {
         const timestamp = new Date().toISOString();
 
         try {
-            await addSentEmails(userEmail, {
+            await addEmailToOutbox(userEmail, {
                 recipient: recipientEmail,
                 subject,
                 content: emailContent,
                 timestamp,
             });
 
-            await addInboxEmails(recipientEmail, {
+            await addEmailToInbox(recipientEmail, {
                 sender: userEmail,
                 subject,
                 content: emailContent,
                 timestamp,
+                isRead: false
             });
 
             setRecipientEmail("");

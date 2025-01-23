@@ -21,7 +21,7 @@ function NavBar() {
             </div>
             <div className={styles.links}>
                 <NavLink
-                    to="/home"
+                    to="/"
                     className={({ isActive }) =>
                         isActive ? `${styles.link} ${styles.active}` : styles.link
                     }

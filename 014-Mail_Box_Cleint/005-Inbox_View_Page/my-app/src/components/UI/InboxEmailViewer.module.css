@@ -1,0 +1,66 @@
+.viewerContainer {
+    min-height: 100vh;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.backButton {
+    margin-bottom: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+}
+
+.backButton:hover {
+    background-color: #0056b3;
+}
+
+.deleteButton {
+    margin-bottom: 20px;
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.deleteButton:hover {
+    background-color: rgb(113, 3, 3);
+}
+
+.emailDetails {
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subject {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.sender,
+.timestamp {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.content {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+}

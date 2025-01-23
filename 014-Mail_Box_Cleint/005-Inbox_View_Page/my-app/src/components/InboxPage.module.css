@@ -1,9 +1,8 @@
 .inboxContainer {
-    min-height: 100vh; /* Ensure it takes up full screen height */
+    min-height: 100vh;
     display: flex;
-    flex-direction: column; /* Ensure children are stacked vertically */
+    flex-direction: column;
 }
-
 
 .heading {
     font-size: 28px;
@@ -19,7 +18,6 @@
 
 .emailRow {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     padding: 10px 15px;
     background-color: #fff;
@@ -32,6 +30,13 @@
 
 .emailRow:hover {
     background-color: #f1f1f1;
+}
+
+.emailLeft {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
 }
 
 .emailLink {
@@ -47,6 +52,14 @@
     font-weight: bold;
     font-size: 16px;
     flex: 1;
+    margin-right: 10px;
+}
+
+.emailSubject {
+    font-size: 16px;
+    font-weight: bold;
+    flex: 2;
+    margin-right: 10px;
 }
 
 .emailSnippet {
@@ -58,4 +71,18 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.emailTimestamp {
+    font-size: 12px;
+    color: #aaa;
+}
+
+/* Blue dot for unread emails */
+.unreadDot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: lightseagreen;
+    margin-right: 10px;
 }
