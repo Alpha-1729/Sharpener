@@ -1,0 +1,73 @@
+.container {
+    margin-top: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10rem;
+}
+
+.card {
+    width: 22rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.cardTitle {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: black;
+    font-weight: 500;
+}
+
+.button {
+    background-color: #168dd7 !important;
+    border: none;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 20px !important;
+    width: 100% !important;
+    margin-bottom: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #87ceeb;
+}
+
+.loginLink {
+    background-color: #d4edda;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: black solid 1px;
+    width: 22rem;
+}
+
+.loginLink:hover {
+    background-color: #c3e6cb;
+}
+
+.errorMessage {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+.forgotPassword {
+    text-align: center;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.forgotPassword:hover {
+    color: #0056b3;
+}

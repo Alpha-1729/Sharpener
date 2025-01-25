@@ -1,0 +1,46 @@
+.listingPage {
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+.pageHeading {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.addButton {
+    background-color: #007bff;
+    border: none;
+    margin-bottom: 20px;
+}
+
+.listingList {
+    margin-top: 20px;
+}
+
+.listingItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.listingText {
+    flex: 1;
+}
+
+.listingActions {
+    display: flex;
+    gap: 10px;
+}
+
+.editButton {
+    background-color: #28a745;
+}
+
+.deleteButton {
+    background-color: #dc3545;
+}

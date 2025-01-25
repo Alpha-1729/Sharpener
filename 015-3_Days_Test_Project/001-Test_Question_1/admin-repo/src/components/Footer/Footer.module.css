@@ -1,0 +1,47 @@
+/* Footer Container Styles */
+.footer {
+    background-color: #1f2937;
+    /* Dark background */
+    color: #ffffff;
+    /* White text */
+    padding: 1.5rem 0;
+}
+
+/* Headings */
+.footer h4,
+.footer h5 {
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+/* Paragraphs */
+.footer p {
+    color: #d1d5db;
+    /* Light gray text */
+    margin: 0.5rem 0;
+}
+
+/* Links Styling */
+.footer a {
+    color: #9ca3af;
+    /* Gray for links */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: #3b82f6;
+    /* Blue hover effect */
+}
+
+/* Social Media Links */
+.socialLinks a {
+    margin-right: 1rem;
+    color: #9ca3af;
+    /* Gray color */
+}
+
+.socialLinks a:hover {
+    color: #3b82f6;
+    /* Blue hover effect */
+}
