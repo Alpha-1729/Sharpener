@@ -34,6 +34,15 @@ function NavBar() {
                     Home
                 </NavLink>
 
+                <NavLink
+                    to="/order-history"
+                    className={({ isActive }) =>
+                        isActive ? `${styles.link} ${styles.active}` : styles.link
+                    }
+                >
+                    Order History
+                </NavLink>
+
 
                 {!isAuthenticated && (
                     <NavLink

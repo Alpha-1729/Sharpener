@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { fetchAllListings } from "../store/Listing/listingActions"; // Adjust to your file structure
 import { Card, Button, Form, Row, Col } from "react-bootstrap"; // Importing Row, Col, Card, and Button components
+import BookingModal from "../components/Modal/BookingModal"; // Import the BookingModal component
 import styles from "./CategoryPage.module.css";
 
 const CategoryPage = () => {
@@ -10,6 +11,8 @@ const CategoryPage = () => {
     const [loading, setLoading] = useState(true); // Loading state
     const [minPrice, setMinPrice] = useState(0); // Min price filter
     const [maxPrice, setMaxPrice] = useState(1000); // Max price filter
+    const [showModal, setShowModal] = useState(false); // State to control modal visibility
+    const [selectedListing, setSelectedListing] = useState(null); // State to store the selected listing for booking
 
     // Get the category name from the URL query parameters
     const location = useLocation();
@@ -52,6 +55,16 @@ const CategoryPage = () => {
 
     const applyPriceFilter = () => {
         filterItems(listings); // Reapply filter when the "Apply" button is clicked
+    };
+
+    const handleShowModal = (listing) => {
+        setSelectedListing(listing); // Set the selected listing for booking
+        setShowModal(true); // Show the modal
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false); // Close the modal
+        setSelectedListing(null); // Clear the selected listing
     };
 
     if (loading) {
@@ -109,13 +122,24 @@ const CategoryPage = () => {
                                 <Card.Text className={styles.address}>
                                     {listing.address}, {listing.city}, {listing.pincode}
                                 </Card.Text>
-                                <Button variant="primary">Book Now</Button>
+                                <Button variant="primary" onClick={() => handleShowModal(listing)}>
+                                    Book Now
+                                </Button>
                             </Card.Body>
                         </Card>
                     ))}
                 </div>
             ) : (
                 <p>No listings found for this category and price range.</p> // Show this message if no listings match the filters
+            )}
+
+            {/* Booking Modal */}
+            {selectedListing && (
+                <BookingModal
+                    show={showModal}
+                    handleClose={handleCloseModal}
+                    listing={selectedListing} // Pass the selected listing to the modal
+                />
             )}
         </div>
     );

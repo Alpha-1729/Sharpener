@@ -1,0 +1,52 @@
+.orderCard {
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    min-height: 450px; /* Set a fixed minimum height for the card */
+    height: 100%;
+}
+
+.image {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+}
+
+.placeName {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.statusBadge {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    display: block;
+    width: fit-content;
+}
+
+.cardText {
+    font-size: 1.1rem;
+    flex-grow: 1; /* Ensure the text area grows to fill space */
+    margin-bottom: 1rem; /* Add space before the button */
+}
+
+.price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #d9534f;
+}
+
+.orderDate {
+    font-size: 1rem;
+    color: #6c757d;
+    /* Subtle color for the date */
+    margin-top: 0.5rem;
+}
+
+.deleteButton {
+    margin-top: 1rem;
+    width: 100%; /* Ensure the button takes full width but doesn't stretch unnecessarily */
+}
