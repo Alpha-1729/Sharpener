@@ -107,3 +107,14 @@ input[type="text"]:invalid:focus {
     color: #f87171;
     font-size: 0.875rem;
 }
+
+.imagePreview {
+    max-width: 200px;
+    max-height: 150px;
+    object-fit: cover;
+    margin-top: 10px;
+}
+
+.uploadError {
+    color: red;
+}

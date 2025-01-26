@@ -22,7 +22,7 @@ const categorySlice = createSlice({
             }
         },
         deleteCategory(state, action) {
-            state.categories = state.categories.filter((cat) => cat.id !== action.payload.id);
+            state.categories = state.categories.filter((cat) => cat.id !== action.payload);
         }
     }
 });

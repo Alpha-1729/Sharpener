@@ -9,6 +9,7 @@ export const fetchAllCategories = async () => {
             const categories = Object.entries(snapshot.val()).map(([id, category]) => ({
                 id,
                 name: category.name,
+                url: category.url
             }));
             return { response: categories, error: null };
         }
@@ -21,8 +22,8 @@ export const fetchAllCategories = async () => {
 export const addCategory = async (category) => {
     try {
         const newCategoryRef = push(ref(database, "categories"));
-        await set(newCategoryRef, { name: category });
-        return { response: { id: newCategoryRef.key, name: category }, error: null };
+        await set(newCategoryRef, { name: category.name, url: category.url });
+        return { response: { id: newCategoryRef.key, name: category.name, url: category.url }, error: null };
     } catch (err) {
         return { response: null, error: "Failed to add category." };
     }
@@ -30,7 +31,7 @@ export const addCategory = async (category) => {
 
 export const editCategory = async (category) => {
     try {
-        await update(ref(database, `categories/${category.id}`), { name: category.name });
+        await update(ref(database, `categories/${category.id}`), { name: category.name, url: category.url });
         return { response: category, error: null };
     } catch (err) {
         return { response: null, error: "Failed to update category." };

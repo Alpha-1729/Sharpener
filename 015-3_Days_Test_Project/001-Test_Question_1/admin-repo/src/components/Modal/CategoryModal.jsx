@@ -1,45 +1,110 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { categoryActions } from "../../store/Category/categorySlice";
 import styles from "./CategoryModal.module.css";
 import { addCategory, editCategory } from "../../store/Category/categoryActions";
+import useImageUpload from "../../hooks/useImageUpload";
 
 function CategoryModal({ showModal, handleClose, isEditing, currentCategory }) {
-    const [categoryName, setCategoryName] = useState(currentCategory?.name || "");
-    const [error, setError] = useState("");
     const dispatch = useDispatch();
 
+    const categoryNameRef = useRef("");
+    const imageRef = useRef("");
+
+    const [error, setError] = useState("");
+    const [imagePreview, setImagePreview] = useState(null);
+    const [imageUploading, setImageUploading] = useState(false);
+
+    const { uploadImage, isUploading, imageUrl, uploadError } = useImageUpload();
+
+    useEffect(() => {
+        if (isEditing) {
+            categoryNameRef.current.value = currentCategory.name;
+            setImagePreview(currentCategory.url);
+        } else {
+            setImagePreview(null);
+        }
+        setError("");
+    }, [showModal, currentCategory]);
+
+    const handleImageChange = () => {
+        setImagePreview(null);
+    };
+
     const handleSaveCategory = async () => {
-        if (!categoryName.trim()) {
+        setError("");
+        const enteredCategory = categoryNameRef.current.value.trim();
+        if (!enteredCategory) {
             setError("Category name is required!");
             return;
         }
 
+        if (!imagePreview && !imageRef.current.files.length) {
+            setError("Category image is required!");
+            return;
+        }
+
+        let imgUrl = null;
+        if (imagePreview) {
+            imgUrl = imagePreview;
+        } else {
+            // Handle image upload when a new file is selected
+            const file = imageRef.current.files[0];
+            if (file) {
+                setImageUploading(true);
+                try {
+                    const uploadedImage = await uploadImage(file);
+                    if (uploadError) {
+                        setError(uploadError);
+                        setImageUploading(false);
+                        return;
+                    }
+                    imgUrl = uploadedImage.url;
+                } catch (uploadError) {
+                    setError("Failed to upload image.");
+                    setImageUploading(false);
+                    return;
+                }
+            }
+        }
+
+        const formData = {
+            name: enteredCategory,
+            url: imgUrl
+        };
+
+        setImageUploading(false); // Stop uploading indicator after image processing
+
         try {
-            let response, error;
+            let response, categoryError;
+
             if (isEditing) {
-                ({ response, error } = await editCategory({ id: currentCategory.id, name: categoryName }));
-                if (!error) dispatch(categoryActions.editCategory(response));
+                // Update existing category
+                ({ response, categoryError } = await editCategory({
+                    id: currentCategory.id,
+                    ...formData
+                }));
+                if (!categoryError) {
+                    dispatch(categoryActions.editCategory(response));
+                }
             } else {
-                ({ response, error } = await addCategory(categoryName));
-                if (!error) dispatch(categoryActions.addCategory({ id: response.id, name: response.name }));
+                // Add new category
+                ({ response, categoryError } = await addCategory(formData));
+                if (!categoryError) {
+                    dispatch(categoryActions.addCategory(response));
+                }
             }
 
-            if (error) {
-                setError(error);
+            if (categoryError) {
+                setError(categoryError);
             } else {
-                handleClose();
+                handleClose(); // Close modal after successful save
             }
         } catch (err) {
             setError("An unexpected error occurred. Please try again.");
         }
     };
-
-    useEffect(() => {
-        setCategoryName(currentCategory?.name || "");
-        setError("");
-    }, [showModal, currentCategory]);
 
     return (
         <Modal show={showModal} onHide={handleClose} centered className={styles.modalDialog}>
@@ -52,12 +117,27 @@ function CategoryModal({ showModal, handleClose, isEditing, currentCategory }) {
                         <Form.Label>Category Name</Form.Label>
                         <Form.Control
                             type="text"
-                            value={categoryName}
-                            onChange={(e) => setCategoryName(e.target.value)}
+                            ref={categoryNameRef}
                             placeholder="Enter category name"
-                            isInvalid={!!error}
                         />
                         <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
+                    </Form.Group>
+
+                    <Form.Group>
+                        <Form.Label>Upload Image</Form.Label>
+                        <Form.Control
+                            type="file"
+                            ref={imageRef}
+                            onChange={handleImageChange}
+                            accept="image/*"
+                        />
+                        {imageUploading && <small>Uploading...</small>}
+                        {error && <small className={styles.uploadError}>{error}</small>}
+                        {imagePreview && !imageUploading && (
+                            <a href={imagePreview} target="_blank" rel="noopener noreferrer">
+                                Preview
+                            </a>
+                        )}
                     </Form.Group>
                 </Form>
             </Modal.Body>
@@ -69,6 +149,7 @@ function CategoryModal({ showModal, handleClose, isEditing, currentCategory }) {
                     variant="primary"
                     onClick={handleSaveCategory}
                     className={styles.saveButton}
+                    disabled={imageUploading}
                 >
                     {isEditing ? "Update" : "Save"}
                 </Button>
