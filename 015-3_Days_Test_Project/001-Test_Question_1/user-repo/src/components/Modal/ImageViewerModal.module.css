@@ -1,0 +1,46 @@
+/* Modal Body Styles */
+.imageContainer {
+    text-align: center;
+    max-height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Image Styling */
+.image {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.image:hover {
+    transform: scale(1.05);
+}
+
+/* Navigation Button Styles */
+.navButton {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.navButton:hover {
+    background-color: #f8f9fa;
+}
+
+/* Close Button Overrides */
+.closeButton {
+    color: #ff5c5c;
+    font-size: 20px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.closeButton:hover {
+    transform: rotate(90deg);
+    color: #ff2c2c;
+}

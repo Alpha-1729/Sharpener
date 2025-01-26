@@ -1,0 +1,26 @@
+/* Booking Modal */
+.bookingModal .modal-content {
+    border-radius: 10px;
+}
+
+.bookingModal .modal-header {
+    background-color: #f8f9fa;
+}
+
+.bookingModal .modal-footer {
+    border-top: 1px solid #ddd;
+}
+
+.bookingModal .form-control {
+    margin-bottom: 10px;
+    border-radius: 12px;
+}
+
+.bookingModal .form-label {
+    font-weight: bold;
+}
+
+.bookingModal button {
+    font-size: 18px;
+    border-radius: 8px;
+}

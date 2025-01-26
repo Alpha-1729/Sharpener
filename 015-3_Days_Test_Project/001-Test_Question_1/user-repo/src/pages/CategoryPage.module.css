@@ -1,0 +1,92 @@
+.categoryPage {
+    text-align: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.categoryItems {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.categoryCard {
+    width: 300px;
+    text-align: center;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.categoryCard:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 1px solid #ddd;
+}
+
+.caption {
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    text-transform: capitalize;
+}
+
+.price {
+    margin-top: 10px;
+    font-size: 20px;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.address {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #777;
+}
+
+button {
+    margin-top: 0px !important;
+    font-size: 20px !important;
+}
+
+/* Price Filter Row */
+.priceFilterRow {
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.priceFilterRow .form-group {
+    margin-bottom: 15px;
+}
+
+.priceFilterRow .d-flex {
+    justify-content: flex-end;
+}
+
+/* Custom Styling for Floating Labels */
+.floating-labels .form-control {
+    border-radius: 12px;
+    box-shadow: none;
+}
+
+.floating-labels .form-label {
+    color: #555;
+}
+
+.floating-labels .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
