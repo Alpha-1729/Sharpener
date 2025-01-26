@@ -1,6 +1,7 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
 import { authActions } from "../store/Auth/authSlice";
 import styles from "./NavBar.module.css";
 
@@ -15,13 +16,11 @@ function NavBar() {
         navigate('/login');
     };
 
-    const handleBrandClick = () => {
-        navigate("/home");
-    };
+    const handleRedirect = (path) => navigate(path);
 
     return (
         <nav className={styles.navBar}>
-            <div className={styles.brand} onClick={handleBrandClick}>
+            <div className={styles.brand} onClick={() => handleRedirect("/home")}>
                 Admin
             </div>
             <div className={styles.links}>
@@ -34,38 +33,36 @@ function NavBar() {
                     Home
                 </NavLink>
 
-                {isAuthenticated && (
-                    <NavLink
-                        to="/category"
-                        className={({ isActive }) =>
-                            isActive ? `${styles.link} ${styles.active}` : styles.link
-                        }
-                    >
-                        Category
-                    </NavLink>
-                )}
+                {isAuthenticated &&
+                    <>
+                        <NavLink
+                            to="/category"
+                            className={({ isActive }) =>
+                                isActive ? `${styles.link} ${styles.active}` : styles.link
+                            }
+                        >
+                            Category
+                        </NavLink>
 
-                {isAuthenticated && (
-                    <NavLink
-                        to="/listing"
-                        className={({ isActive }) =>
-                            isActive ? `${styles.link} ${styles.active}` : styles.link
-                        }
-                    >
-                        Listing
-                    </NavLink>
-                )}
+                        <NavLink
+                            to="/listing"
+                            className={({ isActive }) =>
+                                isActive ? `${styles.link} ${styles.active}` : styles.link
+                            }
+                        >
+                            Listings
+                        </NavLink>
 
-                {isAuthenticated && (
-                    <NavLink
-                        to="/booking"
-                        className={({ isActive }) =>
-                            isActive ? `${styles.link} ${styles.active}` : styles.link
-                        }
-                    >
-                        Booking
-                    </NavLink>
-                )}
+                        <NavLink
+                            to="/booking"
+                            className={({ isActive }) =>
+                                isActive ? `${styles.link} ${styles.active}` : styles.link
+                            }
+                        >
+                            Bookings
+                        </NavLink>
+                    </>
+                }
 
                 {!isAuthenticated && (
                     <NavLink

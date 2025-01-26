@@ -1,23 +1,26 @@
 import React, { useRef, useState } from "react";
-import { Container, Form, Button, Card, FloatingLabel } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { Container, Form, Button, Card, FloatingLabel } from "react-bootstrap";
+
 import { signUpUser } from "../../store/Auth/authActions";
+
 import styles from "./SignUpForm.module.css";
 
 function SignUpForm() {
     const emailRef = useRef("");
     const passwordRef = useRef("");
     const confirmPasswordRef = useRef("");
+
     const [errorMessage, setErrorMessage] = useState("");
 
     const navigate = useNavigate();
 
-    const handleLoginRedirect = () => {
-        navigate("/login");
-    };
+    const handleRedirect = (path) => navigate(path);
 
     const submitHandler = async (event) => {
         event.preventDefault();
+
+        setErrorMessage("");
 
         const enteredEmail = emailRef.current.value;
         const enteredPassword = passwordRef.current.value;
@@ -35,7 +38,7 @@ function SignUpForm() {
             return;
         }
 
-        setErrorMessage("");
+
         navigate("/login");
     };
 
@@ -86,7 +89,7 @@ function SignUpForm() {
                 </Card.Body>
             </Card>
 
-            <div className={styles.loginLink} onClick={handleLoginRedirect}>
+            <div className={styles.loginLink} onClick={() => handleRedirect("/login")}>
                 Have an account? Login
             </div>
         </Container>

@@ -1,29 +1,28 @@
 import React, { useRef, useState } from "react";
-import { Container, Form, Button, Card, FloatingLabel } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-import { signInUser } from "../../store/Auth/authActions";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { Container, Form, Button, Card, FloatingLabel } from "react-bootstrap";
+
+import { signInUser } from "../../store/Auth/authActions";
 import { authActions } from "../../store/Auth/authSlice";
+
 import styles from "./LoginForm.module.css";
 
 function LoginForm() {
     const emailRef = useRef("");
     const passwordRef = useRef("");
+
     const [errorMessage, setErrorMessage] = useState("");
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const handleForgotPasswordRedirect = () => {
-        navigate("/forgot-password");
-    };
-
-    const handleSignUpRedirect = () => {
-        navigate("/sign-up");
-    };
+    const handleRedirect = (path) => navigate(path);
 
     const submitHandler = async (event) => {
         event.preventDefault();
+
+        setErrorMessage("");
 
         const enteredEmail = emailRef.current.value;
         const enteredPassword = passwordRef.current.value;
@@ -35,8 +34,6 @@ function LoginForm() {
             return;
         }
 
-        setErrorMessage("");
-
         dispatch(
             authActions.login({
                 token: response.idToken,
@@ -46,8 +43,6 @@ function LoginForm() {
 
         navigate("/home");
     };
-
-
 
     return (
         <Container className={styles.container}>
@@ -82,14 +77,14 @@ function LoginForm() {
                             Login
                         </Button>
 
-                        <div className={styles.forgotPassword} onClick={handleForgotPasswordRedirect}>
+                        <div className={styles.forgotPassword} onClick={() => handleRedirect("/forgot-password")}>
                             Forgot Password?
                         </div>
                     </Form>
                 </Card.Body>
             </Card>
 
-            <div className={styles.loginLink} onClick={handleSignUpRedirect}>
+            <div className={styles.loginLink} onClick={() => handleRedirect("/sign-up")}>
                 Create an Account
             </div>
         </Container>

@@ -1,88 +1,63 @@
-/* General Navbar Styles */
 .navBar {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 1.2rem 2rem;
-    /* Slightly larger padding */
     background-color: #2c3e50;
-    /* Modern dark blue-gray background */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    /* Subtle shadow for depth */
     position: sticky;
-    /* Navbar stays on top while scrolling */
     top: 0;
     z-index: 1000;
 }
 
-/* Brand Styles */
 .brand {
     font-size: 2rem;
-    /* Larger font size for the brand */
     font-weight: bold;
     color: #ecf0f1;
-    /* Soft white */
     cursor: pointer;
     transition: color 0.3s ease;
 }
 
 .brand:hover {
     color: #3498db;
-    /* Bright blue hover effect */
 }
 
-/* Links Container */
 .links {
     display: flex;
     gap: 2.5rem;
-    /* Increased gap for better spacing */
     justify-content: center;
     flex-grow: 1;
 }
 
-/* Link Styles */
 .link {
     font-size: 1.2rem;
-    /* Larger font size for links */
     color: #bdc3c7;
-    /* Light gray for inactive links */
     text-decoration: none;
     padding: 0.5rem 0.8rem;
-    /* Added padding for better click area */
     border-radius: 5px;
-    /* Rounded edges */
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .link:hover {
     color: #ffffff;
-    /* Bright white on hover */
     background-color: #34495e;
-    /* Slightly darker blue-gray */
 }
 
 .active {
     color: #ffffff;
-    /* Active link in white */
     font-weight: bold;
     background-color: #2980b9;
-    /* Bright blue for active links */
     border-radius: 5px;
-    /* Rounded edges for active links */
     padding: 0.5rem 0.8rem;
 }
 
-/* Logout Button Styles */
 .logoutButton {
     background-color: #e74c3c;
-    /* Vibrant red */
     color: #ffffff;
     border: none;
     border-radius: 5px;
     padding: 0.8rem 1.5rem;
-    /* Larger button for better visibility */
     font-size: 1.1rem;
-    /* Slightly larger font size */
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
@@ -90,12 +65,9 @@
 
 .logoutButton:hover {
     background-color: #c0392b;
-    /* Darker red on hover */
     transform: scale(1.05);
-    /* Adds a zoom effect */
 }
 
-/* Responsive Styles */
 @media (max-width: 768px) {
     .navBar {
         flex-direction: column;
