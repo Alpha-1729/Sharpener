@@ -1,46 +1,86 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Button, Modal, Form, FloatingLabel, FormCheck } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { listingActions } from "../../store/Listing/listingSlice";
+import { addListing, editListing } from "../../store/Listing/listingActions";
 import styles from "./ListingModal.module.css";
+import { listingActions } from "../../store/Listing/listingSlice";
 
-function ListingModal({ showModal, handleClose, isEditing, currentListing, editIndex }) {
-    const [listing, setListing] = useState(currentListing || {});
-    const [error, setError] = useState("");
-    const [images, setImages] = useState([]);
+function ListingModal({ showModal, handleClose, isEditing, currentListing }) {
+    const categories = useSelector((state) => state.categories.categories);
     const dispatch = useDispatch();
 
-    // Fetch categories from the Redux store
-    const categories = useSelector((state) => state.category.categories);
+    const categoryRef = useRef("");
+    const placeNameRef = useRef("");
+    const pricePerNightRef = useRef("");
+    const addressRef = useRef("");
+    const cityRef = useRef("");
+    const pincodeRef = useRef("");
+    const fromDateRef = useRef("");
+    const toDateRef = useRef("");
+    const descriptionRef = useRef("");
+    const availabilityRef = useRef("");
+    const imageUrlRef = useRef("");
+
+    const [error, setError] = useState("");
+    const [imagePreview, setImagePreview] = useState("");
 
     useEffect(() => {
-        setListing(currentListing || {});
-        setImages(currentListing?.images || []);
+        if (isEditing) {
+            categoryRef.current.value = currentListing.category || "";
+            placeNameRef.current.value = currentListing.placeName || "";
+            pricePerNightRef.current.value = currentListing.pricePerNight || "";
+            addressRef.current.value = currentListing.address || "";
+            cityRef.current.value = currentListing.city || "";
+            pincodeRef.current.value = currentListing.pincode || "";
+            fromDateRef.current.value = currentListing.fromDate || "";
+            toDateRef.current.value = currentListing.toDate || "";
+            descriptionRef.current.value = currentListing.description || "";
+            availabilityRef.current.checked = currentListing.isAvailable || false;
+            if (currentListing.imageUrl) {
+                setImagePreview(currentListing.imageUrl);
+            }
+        }
         setError("");
     }, [showModal, currentListing]);
 
-    const handleImageChange = (e) => {
-        const files = Array.from(e.target.files);
-        setImages(files);
-    };
-
-    const handleSaveListing = () => {
-        if (!listing.placeName || !listing.pricePerNight || !listing.address || !listing.city || !listing.pincode || images.length === 0 || !listing.description) {
-            setError("All fields are required, including images and description!");
+    const handleSaveListing = async () => {
+        if (
+            !placeNameRef.current.value ||
+            !pricePerNightRef.current.value ||
+            !addressRef.current.value ||
+            !cityRef.current.value ||
+            !pincodeRef.current.value ||
+            !descriptionRef.current.value ||
+            !imageUrlRef.current.files[0]
+        ) {
+            setError("All fields are required!");
             return;
         }
 
-        setError("");
-
-        // Add the images to the listing object before saving
-        const updatedListing = { ...listing, images };
+        const formData = {
+            category: categoryRef.current.value,
+            placeName: placeNameRef.current.value,
+            pricePerNight: pricePerNightRef.current.value,
+            address: addressRef.current.value,
+            city: cityRef.current.value,
+            pincode: pincodeRef.current.value,
+            fromDate: fromDateRef.current.value,
+            toDate: toDateRef.current.value,
+            description: descriptionRef.current.value,
+            isAvailable: availabilityRef.current.checked,
+            imageUrl: imageUrlRef.current.files[0].name,
+        };
 
         if (isEditing) {
-            dispatch(listingActions.editListing({ index: editIndex, updatedListing }));
-        } else {
-            dispatch(listingActions.addListing(updatedListing));
+            const { response, error } = await editListing({ id: currentListing.id, ...formData });
+            dispatch(listingActions.editListing({ id: currentListing.id, updatedData: formData }));
+        }
+        else {
+            const { response, error } = await addListing(formData);
+            dispatch(listingActions.addListing(response));
         }
 
+        setError("");
         handleClose();
     };
 
@@ -54,15 +94,11 @@ function ListingModal({ showModal, handleClose, isEditing, currentListing, editI
                     {/* Category */}
                     <Form.Group className={styles.formGroup}>
                         <Form.Label>Category</Form.Label>
-                        <Form.Control
-                            as="select"
-                            value={listing.category || ""}
-                            onChange={(e) => setListing({ ...listing, category: e.target.value })}
-                        >
+                        <Form.Control as="select" ref={categoryRef}>
                             {categories && categories.length > 0 ? (
-                                categories.map((category, index) => (
-                                    <option key={index} value={category}>
-                                        {category}
+                                categories.map((category) => (
+                                    <option key={category.id} value={category.name}>
+                                        {category.name}
                                     </option>
                                 ))
                             ) : (
@@ -71,66 +107,79 @@ function ListingModal({ showModal, handleClose, isEditing, currentListing, editI
                         </Form.Control>
                     </Form.Group>
 
-                    {/* Place Name */}
-                    <Form.Group className={styles.formGroup}>
-                        <FloatingLabel label="Place Name" controlId="placeName">
-                            <Form.Control
-                                type="text"
-                                value={listing.placeName || ""}
-                                onChange={(e) => setListing({ ...listing, placeName: e.target.value })}
-                                placeholder="Enter place name"
-                                isInvalid={!!error}
-                            />
-                        </FloatingLabel>
-                    </Form.Group>
-
-                    {/* Price per Night */}
-                    <Form.Group className="mb-3">
-                        <FloatingLabel label="Price per Night" controlId="pricePerNight">
-                            <Form.Control
-                                type="number"
-                                value={listing.pricePerNight || ""}
-                                onChange={(e) => setListing({ ...listing, pricePerNight: e.target.value })}
-                                placeholder="Enter price"
-                                isInvalid={!!error}
-                            />
-                        </FloatingLabel>
-                    </Form.Group>
-
-                    {/* Address */}
-                    <Form.Group className="mb-3">
-                        <FloatingLabel label="Address" controlId="address">
-                            <Form.Control
-                                type="text"
-                                value={listing.address || ""}
-                                onChange={(e) => setListing({ ...listing, address: e.target.value })}
-                                placeholder="Enter address"
-                                isInvalid={!!error}
-                            />
-                        </FloatingLabel>
-                    </Form.Group>
-
-                    {/* City and Pincode on the same row */}
+                    {/* Place Name and Price per Night in a row */}
                     <div className="d-flex justify-content-between">
                         <Form.Group className="w-48 pr-2">
-                            <FloatingLabel label="City" controlId="city">
+                            <FloatingLabel label="Place Name" controlId="placeName">
                                 <Form.Control
                                     type="text"
-                                    value={listing.city || ""}
-                                    onChange={(e) => setListing({ ...listing, city: e.target.value })}
-                                    placeholder="Enter city"
-                                    isInvalid={!!error}
+                                    ref={placeNameRef}
+                                    placeholder="Enter place name"
                                 />
                             </FloatingLabel>
                         </Form.Group>
                         <Form.Group className="w-48 pl-2">
+                            <FloatingLabel label="Price per Night" controlId="pricePerNight">
+                                <Form.Control
+                                    type="number"
+                                    ref={pricePerNightRef}
+                                    placeholder="Enter price"
+                                />
+                            </FloatingLabel>
+                        </Form.Group>
+                    </div>
+
+                    {/* Address, City, and Pincode in a row */}
+                    <div className="d-flex justify-content-between">
+                        <Form.Group className="w-48 pr-2">
+                            <FloatingLabel label="Address" controlId="address">
+                                <Form.Control
+                                    type="text"
+                                    ref={addressRef}
+                                    placeholder="Enter address"
+                                />
+                            </FloatingLabel>
+                        </Form.Group>
+                        <Form.Group className="w-48 pl-2">
+                            <FloatingLabel label="City" controlId="city">
+                                <Form.Control
+                                    type="text"
+                                    ref={cityRef}
+                                    placeholder="Enter city"
+                                />
+                            </FloatingLabel>
+                        </Form.Group>
+                    </div>
+
+                    <div className="d-flex justify-content-between">
+                        <Form.Group className="w-48 pr-2">
                             <FloatingLabel label="Pincode" controlId="pincode">
                                 <Form.Control
                                     type="text"
-                                    value={listing.pincode || ""}
-                                    onChange={(e) => setListing({ ...listing, pincode: e.target.value })}
+                                    ref={pincodeRef}
                                     placeholder="Enter pincode"
-                                    isInvalid={!!error}
+                                />
+                            </FloatingLabel>
+                        </Form.Group>
+                    </div>
+
+                    {/* From Date and To Date in a row */}
+                    <div className="d-flex justify-content-between">
+                        <Form.Group className="w-48 pr-2">
+                            <FloatingLabel label="From Date" controlId="fromDate">
+                                <Form.Control
+                                    type="date"
+                                    ref={fromDateRef}
+                                    placeholder="Enter from date"
+                                />
+                            </FloatingLabel>
+                        </Form.Group>
+                        <Form.Group className="w-48 pl-2">
+                            <FloatingLabel label="To Date" controlId="toDate">
+                                <Form.Control
+                                    type="date"
+                                    ref={toDateRef}
+                                    placeholder="Enter to date"
                                 />
                             </FloatingLabel>
                         </Form.Group>
@@ -141,61 +190,41 @@ function ListingModal({ showModal, handleClose, isEditing, currentListing, editI
                         <FloatingLabel label="Description" controlId="description">
                             <Form.Control
                                 as="textarea"
-                                rows={12} // Increase the number of rows for the larger text area
-                                value={listing.description || ""}
-                                onChange={(e) => setListing({ ...listing, description: e.target.value })}
+                                rows={3}
+                                ref={descriptionRef}
                                 placeholder="Enter a description"
-                                isInvalid={!!error}
-                                className={styles.textarea} // Add a custom class for styling
+                                className={styles.textarea}
                             />
                         </FloatingLabel>
                     </Form.Group>
 
-                    {/* Availability Toggle Switch */}
+                    {/* Availability */}
                     <Form.Group className={styles.formGroup}>
                         <div className="d-flex justify-content-between align-items-center">
                             <Form.Label>Availability</Form.Label>
                             <FormCheck
                                 type="switch"
                                 id="availabilitySwitch"
-                                label={listing.isAvailable ? "Available" : "Not Available"}
-                                checked={listing.isAvailable || false}
-                                onChange={() => setListing({ ...listing, isAvailable: !listing.isAvailable })}
+                                ref={availabilityRef}
                             />
                         </div>
                     </Form.Group>
 
-                    {/* Images */}
-                    <Form.Group>
-                        <Form.Label>Images</Form.Label>
+                    {/* Single Image Selection */}
+                    <Form.Group className={styles.formGroup}>
+                        <Form.Label>Image</Form.Label>
                         <Form.Control
                             type="file"
-                            multiple
-                            onChange={handleImageChange}
-                            isInvalid={!!error}
+                            ref={imageUrlRef}
+                            accept="image/*"
                         />
-                        <small className="form-text text-muted">
-                            Please upload 3 to 4 images of the place.
-                        </small>
-                        <div className="mt-3">
-                            {images && images.length > 0 && (
-                                <div className="d-flex flex-wrap">
-                                    {images.map((image, index) => (
-                                        <img
-                                            key={index}
-                                            src={URL.createObjectURL(image)}
-                                            alt={`uploaded ${index}`}
-                                            className="img-thumbnail mr-2"
-                                            style={{ width: "100px", height: "100px", objectFit: "cover" }}
-                                        />
-                                    ))}
-                                </div>
-                            )}
-                        </div>
+                        <small className="form-text text-muted">Upload an image of the place.</small>
+                        {/* Display the image preview if available */}
+                        {imagePreview && <img src={imagePreview} alt="Image Preview" className={styles.imagePreview} />}
                     </Form.Group>
 
                     {/* Error Message */}
-                    {error && <div className="text-danger">{error}</div>}
+                    {error && <div className="text-danger mt-2">{error}</div>}
                 </Form>
             </Modal.Body>
             <Modal.Footer className={styles.modalFooter}>

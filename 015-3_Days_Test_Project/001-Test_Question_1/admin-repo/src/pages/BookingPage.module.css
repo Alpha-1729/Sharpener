@@ -1,0 +1,36 @@
+/* BookingPage.module.css */
+.bookingPageContainer {
+    margin-top: 20px;
+}
+
+.header {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.bookingCard {
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.statusBadge {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    display: block;
+    width: fit-content;
+}
+
+.buttonGroup {
+    margin-top: 10px;
+}
+
+.approveButton {
+    margin-right: 10px;
+}
+
+.rejectButton {
+    margin-left: 10px;
+}

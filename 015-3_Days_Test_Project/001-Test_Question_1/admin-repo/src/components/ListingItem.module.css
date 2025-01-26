@@ -1,0 +1,102 @@
+/* General item styling */
+.listingItem {
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Row styling */
+.listingRow {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Text section styling */
+.listingText {
+    margin-bottom: 10px;
+}
+
+/* Title (Name) styling */
+.listingTitle {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Amount styling (large and bold) */
+.listingAmount {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #28a745;
+    margin: 0 10px 10px 0;
+}
+
+/* Detail text styling */
+.listingDetail {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 2px 0;
+}
+
+/* Image container styling */
+.imageContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+/* Individual image styling */
+.listingImage {
+    width: 100%;
+    height: auto;
+    max-width: 100px;
+    max-height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Button section styling */
+.listingActions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+/* Edit button styling */
+.editButton {
+    background-color: #007bff !important;
+    border: none !important;
+    padding: 5px 10px !important;
+    font-size: 0.9rem;
+    color: #fff !important;
+    border-radius: 5px !important;
+    width: 80px;
+    text-align: center;
+}
+
+/* Delete button styling */
+.deleteButton {
+    background-color: #dc3545 !important;
+    border: none !important;
+    padding: 5px 10px !important;
+    font-size: 0.9rem;
+    color: #fff !important;
+    border-radius: 5px !important;
+    width: 80px;
+    text-align: center;
+}
+
+/* Hover effects for buttons */
+.editButton:hover {
+    background-color: #0056b3 !important;
+}
+
+.deleteButton:hover {
+    background-color: #bd2130 !important;
+}

@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import Footer from './components/Footer/Footer';
 import CategoryPage from './pages/CategoryPage';
 import ListingPage from './pages/ListingPage';
+import BookingPage from './pages/BookingPage';
 
 function App() {
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
@@ -20,6 +21,7 @@ function App() {
         <Route path="/login" element={<LoginForm />} />
         <Route path="/category" element={<CategoryPage />} />
         <Route path="/listing" element={<ListingPage />} />
+        <Route path="/booking" element={<BookingPage />} />
       </Routes>
       <Footer />
     </Fragment>
