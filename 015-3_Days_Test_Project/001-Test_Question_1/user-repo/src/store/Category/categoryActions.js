@@ -9,6 +9,7 @@ export const fetchAllCategories = async () => {
             const categories = Object.entries(snapshot.val()).map(([id, category]) => ({
                 id,
                 name: category.name,
+                url: category.url
             }));
             return { response: categories, error: null };
         }

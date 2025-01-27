@@ -32,7 +32,7 @@ export const fetchBookingHistory = async () => {
                 ...booking,
                 bookedPrice: +listingDetails.pricePerNight * booking.noOfGuests,
                 lisitngDescription: listingDetails.description,
-                imageUrl: listingDetails.imageUrl,
+                imageUrl: listingDetails.imageUrls[0],
                 placeName: listingDetails.placeName
             };
         });

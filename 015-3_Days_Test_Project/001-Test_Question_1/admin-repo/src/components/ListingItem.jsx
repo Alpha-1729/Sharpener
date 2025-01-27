@@ -1,68 +1,81 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { Button, ListGroup, Row, Col } from "react-bootstrap";
+import { Carousel, Card, Button } from "react-bootstrap";
 import styles from "./ListingItem.module.css";
 
+// Function to format the date without the year
+const formatDate = (date) => {
+    const options = { month: "short", day: "numeric" };
+    return new Date(date).toLocaleDateString("en-US", options);
+};
+
 function ListingItem({ listing, onEdit, onDelete }) {
-    const categories = useSelector((state) => state.categories.categories);
-    const categoryName = categories.find((category) => category.name === listing.category)?.name || "N/A";
-
     return (
-        <ListGroup.Item className={styles.listingItem}>
-            <Row className={styles.listingRow}>
-                {/* Display listing details */}
-                <Col xs={12} md={6} className={styles.listingText}>
-                    <h4 className={styles.listingTitle}>{listing.placeName}</h4>
-                    <p className={styles.listingDetail}>
-                        <strong>Address:</strong> {listing.address}
-                    </p>
-                    <p className={styles.listingDetail}>
-                        <strong>City:</strong> {listing.city}
-                    </p>
-                    <p className={styles.listingDetail}>
-                        <strong>Pincode:</strong> {listing.pincode}
-                    </p>
-                    <p className={styles.listingDetail}>
-                        <strong>Category:</strong> {categoryName}
-                    </p>
-                    <p className={styles.listingDetail}>
-                        <strong>Status:</strong> {listing.isAvailable ? "Available" : "Not Available"}
-                    </p>
-                    <p className={styles.listingDetail}>
-                        <strong>From Date:</strong> {listing.fromDate}
-                    </p>
-                    <p className={styles.listingDetail}>
-                        <strong>To Date:</strong> {listing.toDate}
-                    </p>
-                    <p className={styles.listingDetail}>
-                        <strong>Description:</strong> {listing.description}
-                    </p>
-                </Col>
+        <Card className={styles.card}>
+            <div className={styles.cardContent}>
+                {/* Image Viewer */}
+                <div className={styles.imageContainer}>
+                    <Carousel indicators={false} className={styles.carousel}>
+                        {listing.imageUrls.map((url, index) => (
+                            <Carousel.Item key={index}>
+                                <img
+                                    src={url}
+                                    alt={`Slide ${index + 1}`}
+                                    className={styles.image}
+                                />
+                            </Carousel.Item>
+                        ))}
+                    </Carousel>
+                </div>
 
-                {/* Display images */}
-                <Col xs={12} md={3} className={styles.imageContainer}>
-
-                    <img key={listing.id} src={listing.imageUrl} alt={`Listing ${listing.id}`} className={styles.listingImage} />
-                </Col>
-
-                {/* Amount and action buttons */}
-                <Col xs={12} md={3} className={styles.listingActions}>
-                    <p className={styles.listingAmount}>${listing.pricePerNight}</p>
+                {/* Details Section */}
+                <div className={styles.details}>
+                    <h4 className={styles.title}>{listing.placeName}</h4>
+                    <p className={styles.city}>{listing.city}</p>
+                    <p className={styles.description}>{listing.description}</p>
                     <Button
-                        className={`${styles.editButton} btn`}
-                        onClick={() => onEdit(listing)}
+                        className={`${styles.statusButton} btn`}
+                        disabled
                     >
-                        Edit
+                        {listing.isAvailable ? "Available" : "Not Available"}
                     </Button>
-                    <Button
-                        className={`${styles.deleteButton} btn`}
-                        onClick={() => onDelete(listing.id)}
-                    >
-                        Delete
-                    </Button>
-                </Col>
-            </Row>
-        </ListGroup.Item>
+                </div>
+            </div>
+
+            {/* Footer Section */}
+            <div className={styles.footer}>
+                <div className={styles.priceAndActions}>
+                    <span className={styles.price}>
+                        ₹{listing.pricePerNight.toLocaleString()}
+                    </span>
+
+                    {/* Date Range Badge */}
+                    {listing.isAvailable && (
+                        <span className={styles.dateRange}>
+                            <span className={styles.boldText}>
+                                {new Date(listing.fromDate).toLocaleString('default', { month: 'short', day: 'numeric' })} -
+                                {new Date(listing.toDate).toLocaleString('default', { month: 'short', day: 'numeric' })}
+                            </span>
+                        </span>
+                    )}
+
+                    <div className={styles.actions}>
+                        <Button
+                            className={`${styles.editButton} btn`}
+                            onClick={() => onEdit(listing)}
+                        >
+                            Edit
+                        </Button>
+                        <Button
+                            className={`${styles.deleteButton} btn`}
+                            onClick={() => onDelete(listing.id)}
+                        >
+                            Delete
+                        </Button>
+                    </div>
+                </div>
+            </div>
+
+        </Card>
     );
 }
 

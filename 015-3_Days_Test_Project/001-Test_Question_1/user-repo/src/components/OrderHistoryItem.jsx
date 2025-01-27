@@ -2,9 +2,12 @@ import React from "react";
 import { Card, Badge, Button } from "react-bootstrap";
 import styles from "./OrderHistoryItem.module.css";
 
-const OrderHistoryItem = ({ order, onDelete }) => {
-    console.log(order);
+// Function to format the price with commas and rupee symbol
+const formatPrice = (price) => {
+    return `₹${price.toLocaleString()}`;
+};
 
+const OrderHistoryItem = ({ order, onDelete }) => {
     const handleDelete = () => {
         // Call the onDelete function passed from the parent component
         onDelete(order.id);
@@ -23,23 +26,36 @@ const OrderHistoryItem = ({ order, onDelete }) => {
                     {order.placeName}
                 </Card.Title>
 
-                <Badge variant={order.status === "pending" ? "warning" : "success"} className={styles.statusBadge}>
+                {/* Status Badge */}
+                <Badge
+                    variant={order.status === "pending" ? "warning" : "success"}
+                    className={styles.statusBadge}
+                >
                     {order.status}
                 </Badge>
 
-                <Card.Text className={styles.cardText}>
-                    <strong>Price:</strong> <span className={styles.price}>${order.bookedPrice}</span> <br />
-                    <strong>Description:</strong> {order.lisitngDescription} <br />
-                    <strong>Order Date:</strong> <span className={styles.orderDate}>{order.bookingDate}</span> {/* Displaying the order date */}
+                {/* Description Section */}
+                <Card.Text className={styles.description}>
+                    {order.lisitngDescription}
                 </Card.Text>
-
-                {/* Delete Button only for pending bookings */}
-                {order.status === "pending" && (
-                    <Button variant="danger" onClick={handleDelete} className={styles.deleteButton}>
-                        Delete Booking
-                    </Button>
-                )}
             </Card.Body>
+
+            {/* Price and Delete Section */}
+            <Card.Footer className={styles.footer}>
+                <div className={styles.priceDeleteContainer}>
+                    <span className={styles.price}>{formatPrice(order.bookedPrice)}</span>
+                    {/* Delete Button only for pending bookings */}
+                    {order.status === "pending" && (
+                        <Button
+                            variant="danger"
+                            onClick={handleDelete}
+                            className={styles.deleteButton}
+                        >
+                            Delete Booking
+                        </Button>
+                    )}
+                </div>
+            </Card.Footer>
         </Card>
     );
 };

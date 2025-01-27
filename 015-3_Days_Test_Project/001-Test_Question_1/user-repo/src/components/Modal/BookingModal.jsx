@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import { Modal, Button, Form, FloatingLabel } from "react-bootstrap";
-import DatePicker from "react-datepicker";
 import { format } from "date-fns"; // Import the format function
 import "react-datepicker/dist/react-datepicker.css";
 import { useSelector } from "react-redux";
@@ -16,15 +15,15 @@ const BookingModal = ({ show, handleClose, listing }) => {
     const cityRef = useRef("");
     const pincodeRef = useRef("");
 
-    // Use state to control the DatePicker values
-    const [checkInDate, setCheckInDate] = useState(null);
-    const [checkOutDate, setCheckOutDate] = useState(null);
+    // Use state to control the Date values
+    const [checkInDate, setCheckInDate] = useState("");
+    const [checkOutDate, setCheckOutDate] = useState("");
 
     const handleSubmit = async () => {
         // Format dates to dd/MM/yyyy
         const bookingDate = format(new Date(), "dd/MM/yyyy");
-        const formattedCheckInDate = checkInDate ? format(checkInDate, "dd/MM/yyyy") : null;
-        const formattedCheckOutDate = checkOutDate ? format(checkOutDate, "dd/MM/yyyy") : null;
+        const formattedCheckInDate = checkInDate ? format(new Date(checkInDate), "dd/MM/yyyy") : null;
+        const formattedCheckOutDate = checkOutDate ? format(new Date(checkOutDate), "dd/MM/yyyy") : null;
 
         // Gather form data
         const formData = {
@@ -32,7 +31,7 @@ const BookingModal = ({ show, handleClose, listing }) => {
             email: email,
             checkInDate: formattedCheckInDate,
             checkOutDate: formattedCheckOutDate,
-            noOfGuests: noOfGuestsRef.current.value,
+            noOfGuests: +noOfGuestsRef.current.value,
             address: addressRef.current.value,
             city: cityRef.current.value,
             pincode: pincodeRef.current.value,
@@ -41,19 +40,21 @@ const BookingModal = ({ show, handleClose, listing }) => {
             bookingDate: bookingDate
         };
 
-        await addBookings(formData);
+        const { response, error } = await addBookings(formData);
+        console.log(response);
+        console.log(error);
         handleClose(); // Close modal after booking is submitted
     };
 
     return (
-        <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
+        <Modal show={show} onHide={handleClose} centered className="bookingModal">
+            <Modal.Header closeButton className="modal-header">
                 <Modal.Title>Book Your Stay at {listing.placeName}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>
                     {/* Name Field with Floating Label */}
-                    <FloatingLabel controlId="name" label="Name" className="mb-3">
+                    <FloatingLabel controlId="name" label="Name" className="mb-4">
                         <Form.Control
                             type="text"
                             placeholder="Enter your name"
@@ -62,35 +63,30 @@ const BookingModal = ({ show, handleClose, listing }) => {
                         />
                     </FloatingLabel>
 
-                    {/* Date Range */}
-                    <Form.Group controlId="checkInDate" className="mb-3">
-                        <Form.Label>Check-in Date</Form.Label>
-                        <DatePicker
-                            selected={checkInDate} // Use state for selected date
-                            onChange={(date) => setCheckInDate(date)} // Update state on date change
-                            className="form-control"
-                            dateFormat="dd/MM/yyyy"
-                            placeholderText="Select Check-in Date"
-                            minDate={new Date()}
+                    {/* Date Range - Check-in Date with Floating Label */}
+                    <FloatingLabel controlId="checkInDate" label="From" className="mb-4">
+                        <Form.Control
+                            type="date"
+                            value={checkInDate}
+                            onChange={(e) => setCheckInDate(e.target.value)}
+                            min={new Date().toISOString().split("T")[0]} // Minimum date is today
                             required
                         />
-                    </Form.Group>
+                    </FloatingLabel>
 
-                    <Form.Group controlId="checkOutDate" className="mb-3">
-                        <Form.Label>Check-out Date</Form.Label>
-                        <DatePicker
-                            selected={checkOutDate} // Use state for selected date
-                            onChange={(date) => setCheckOutDate(date)} // Update state on date change
-                            className="form-control"
-                            dateFormat="dd/MM/yyyy"
-                            placeholderText="Select Check-out Date"
-                            minDate={checkInDate || new Date()} // Ensure Check-out is after Check-in
+                    {/* Date Range - Check-out Date with Floating Label */}
+                    <FloatingLabel controlId="checkOutDate" label="To" className="mb-4">
+                        <Form.Control
+                            type="date"
+                            value={checkOutDate}
+                            onChange={(e) => setCheckOutDate(e.target.value)}
+                            min={checkInDate || new Date().toISOString().split("T")[0]} // Minimum date is check-in date
                             required
                         />
-                    </Form.Group>
+                    </FloatingLabel>
 
                     {/* Number of Guests with Floating Label */}
-                    <FloatingLabel controlId="guests" label="Number of Guests" className="mb-3">
+                    <FloatingLabel controlId="guests" label="Number of Guests" className="mb-4">
                         <Form.Control
                             type="number"
                             min="1"
@@ -101,7 +97,7 @@ const BookingModal = ({ show, handleClose, listing }) => {
                     </FloatingLabel>
 
                     {/* Address Details with Floating Labels */}
-                    <FloatingLabel controlId="address" label="Address" className="mb-3">
+                    <FloatingLabel controlId="address" label="Address" className="mb-4">
                         <Form.Control
                             type="text"
                             placeholder="Enter your address"
@@ -110,7 +106,7 @@ const BookingModal = ({ show, handleClose, listing }) => {
                         />
                     </FloatingLabel>
 
-                    <FloatingLabel controlId="city" label="City" className="mb-3">
+                    <FloatingLabel controlId="city" label="City" className="mb-4">
                         <Form.Control
                             type="text"
                             placeholder="Enter your city"
@@ -119,7 +115,7 @@ const BookingModal = ({ show, handleClose, listing }) => {
                         />
                     </FloatingLabel>
 
-                    <FloatingLabel controlId="pincode" label="Pincode" className="mb-3">
+                    <FloatingLabel controlId="pincode" label="Pincode" className="mb-4">
                         <Form.Control
                             type="text"
                             placeholder="Enter your pincode"

@@ -16,13 +16,17 @@ function App() {
   return (
     <Fragment>
       <NavBar />
-      <Routes>
-        <Route path="/sign-up" element={<SignUpForm />} />
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/category" element={<CategoryPage />} />
-        <Route path="/listing" element={<ListingPage />} />
-        <Route path="/booking" element={<BookingPage />} />
-      </Routes>
+      {/* Main content wrapper */}
+      <div className="main-content">
+        <Routes>
+          <Route path="/sign-up" element={<SignUpForm />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/category" element={<CategoryPage />} />
+          <Route path="/listing" element={<ListingPage />} />
+          <Route path="/booking" element={<BookingPage />} />
+        </Routes>
+      </div>
+      {/* Footer */}
       <Footer />
     </Fragment>
   );

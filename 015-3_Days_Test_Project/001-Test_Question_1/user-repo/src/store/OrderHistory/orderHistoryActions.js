@@ -1,4 +1,4 @@
-import { getDatabase, ref, get } from "firebase/database";
+import { getDatabase } from "firebase/database";
 import { fetchBookingsByEmail } from "../Booking/bookingActions";
 import { fetchAllListings } from "../Listing/listingActions";
 
@@ -27,10 +27,18 @@ export const fetchOrderHistory = async (email) => {
                 ...booking,
                 bookedPrice: +listingDetails.pricePerNight * booking.noOfGuests,
                 lisitngDescription: listingDetails.description,
-                imageUrl: listingDetails.imageUrl,
+                imageUrl: listingDetails.imageUrls[0],
                 placeName: listingDetails.placeName
             };
         });
+
+        // Sort order history so that "pending" bookings are shown first
+        orderHistory.sort((a, b) => {
+            if (a.status === "pending" && b.status !== "pending") return -1;
+            if (a.status !== "pending" && b.status === "pending") return 1;
+            return 0;
+        });
+
         return { response: orderHistory, error: null };
     } catch (err) {
         return { response: null, error: "Failed to fetch order history." };

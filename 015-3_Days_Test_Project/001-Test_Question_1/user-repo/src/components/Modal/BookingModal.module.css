@@ -1,19 +1,29 @@
-/* Booking Modal */
 .bookingModal .modal-content {
-    border-radius: 10px;
+    border-radius: 12px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
 }
 
 .bookingModal .modal-header {
-    background-color: #f8f9fa;
+    background-color: #e0f7e7;
+    /* Light green color */
+    border-bottom: 2px solid #ddd;
 }
 
 .bookingModal .modal-footer {
-    border-top: 1px solid #ddd;
+    border-top: 2px solid #ddd;
+    display: flex;
+    justify-content: space-between;
 }
 
 .bookingModal .form-control {
-    margin-bottom: 10px;
-    border-radius: 12px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: none;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    padding: 10px;
 }
 
 .bookingModal .form-label {
@@ -21,6 +31,35 @@
 }
 
 .bookingModal button {
-    font-size: 18px;
+    font-size: 16px;
     border-radius: 8px;
+    padding: 10px 20px;
+}
+
+.bookingModal .mb-4 {
+    margin-bottom: 20px !important;
+}
+
+.bookingModal .modal-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+}
+
+.bookingModal .date-picker {
+    font-size: 16px;
+    padding: 12px 10px;
+    /* Increase padding for larger date input */
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+.bookingModal .date-picker+.form-label {
+    margin-top: 10px;
+    /* Adds space between the label and date picker */
+}
+
+.bookingModal .mb-4 {
+    margin-bottom: 25px !important;
+    /* Adjust space for Date Pickers */
 }

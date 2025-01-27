@@ -25,14 +25,14 @@ function ListingPage() {
         const getListings = async () => {
             const { response, error } = await fetchAllListings();
             if (response) {
-                dispatch(listingActions.setListings(response)); // Assuming you have a 'setListings' action in your slice
+                dispatch(listingActions.setListings(response));
             } else {
                 console.error(error);
             }
         };
 
         getListings();
-    }, [dispatch]); // Only run once on component mount
+    }, [dispatch]);
 
     useEffect(() => {
         (async () => {
@@ -64,7 +64,7 @@ function ListingPage() {
     const handleDeleteListing = async (listingId) => {
         const { response, error } = await deleteListing(listingId);
         if (response) {
-            dispatch(listingActions.deleteListing(listingId)); // Assuming you have a 'deleteListing' action
+            dispatch(listingActions.deleteListing(listingId));
         } else {
             console.error(error);
         }
@@ -78,13 +78,13 @@ function ListingPage() {
         <div className={styles.listingPage}>
             <h1 className={styles.pageHeading}>Listings</h1>
 
-            {/* Add Listing Button */}
+            {/* Add Listing Button - Placed above the grid */}
             <Button className={styles.addButton} onClick={handleShowModal}>
                 Add Listing
             </Button>
 
-            {/* Listings List */}
-            <ListGroup className={styles.listingList}>
+            {/* Listings Grid (two items side by side with a gap in the middle) */}
+            <div className={styles.listingGrid}>
                 {listings.map((listing) => (
                     <ListingItem
                         key={listing.id}
@@ -94,7 +94,7 @@ function ListingPage() {
                         onDelete={handleDeleteListing}
                     />
                 ))}
-            </ListGroup>
+            </div>
 
             {/* Modal for Add/Edit */}
             <ListingModal

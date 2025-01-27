@@ -15,9 +15,7 @@ const BookingPage = () => {
         const { success, error } = await approveBooking(id);
         if (success) {
             setBookings((prevBookings) =>
-                prevBookings.map((booking) =>
-                    booking.id === id ? { ...booking, status: "completed" } : booking
-                )
+                prevBookings.filter((booking) => booking.id !== id) // Remove the approved booking from the list
             );
         } else {
             console.error(error);
@@ -29,7 +27,7 @@ const BookingPage = () => {
         const { success, error } = await rejectBooking(id);
         if (success) {
             setBookings((prevBookings) =>
-                prevBookings.filter((booking) => booking.id !== id)
+                prevBookings.filter((booking) => booking.id !== id) // Remove the rejected booking from the list
             );
         } else {
             console.error(error);
@@ -44,13 +42,13 @@ const BookingPage = () => {
             if (error) {
                 setError(error);
             } else {
-                setBookings(response);
+                setBookings(response.filter((booking) => booking.status !== "completed")); // Exclude completed bookings
             }
             setLoading(false);
         };
 
         fetchBookings();
-    }, []);  // Empty dependency array ensures the effect runs once when the component mounts
+    }, []); // Empty dependency array ensures the effect runs once when the component mounts
 
     return (
         <Container className={styles.bookingPageContainer}>

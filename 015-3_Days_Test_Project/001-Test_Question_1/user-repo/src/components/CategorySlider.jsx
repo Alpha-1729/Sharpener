@@ -51,9 +51,12 @@ const CategorySlider = () => {
 
     return (
         <div className={styles.sliderContainer}>
-            <button className={styles.arrowButton} onClick={handlePrev}>
+            {/* Left Arrow Button */}
+            <button className={`${styles.arrowButton} ${styles.prevButton}`} onClick={handlePrev}>
                 &#8592;
             </button>
+
+            {/* Image Row (Categories) */}
             <div className={styles.imageRow}>
                 {displayedImages.map((category, index) => (
                     <a
@@ -62,7 +65,8 @@ const CategorySlider = () => {
                         className={styles.imageLink}
                     >
                         <img
-                            src={category.imageUrl || "https://cdn.pixabay.com/photo/2018/04/26/16/39/beach-3352363_1280.jpg"}  // Fallback image
+                            // Use category.imageUrl directly to get images from categories
+                            src={category.url}
                             alt={category.name}
                             className={styles.image}
                         />
@@ -70,7 +74,9 @@ const CategorySlider = () => {
                     </a>
                 ))}
             </div>
-            <button className={styles.arrowButton} onClick={handleNext}>
+
+            {/* Right Arrow Button */}
+            <button className={`${styles.arrowButton} ${styles.nextButton}`} onClick={handleNext}>
                 &#8594;
             </button>
         </div>

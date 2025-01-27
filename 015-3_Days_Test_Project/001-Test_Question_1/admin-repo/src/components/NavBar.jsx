@@ -24,14 +24,14 @@ function NavBar() {
                 Admin
             </div>
             <div className={styles.links}>
-                <NavLink
+                {/* <NavLink
                     to="/"
                     className={({ isActive }) =>
                         isActive ? `${styles.link} ${styles.active}` : styles.link
                     }
                 >
                     Home
-                </NavLink>
+                </NavLink> */}
 
                 {isAuthenticated &&
                     <>

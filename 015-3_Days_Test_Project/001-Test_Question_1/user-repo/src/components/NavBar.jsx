@@ -25,25 +25,25 @@ function NavBar() {
                 User
             </div>
             <div className={styles.links}>
-                <NavLink
-                    to="/"
-                    className={({ isActive }) =>
-                        isActive ? `${styles.link} ${styles.active}` : styles.link
-                    }
-                >
-                    Home
-                </NavLink>
-
-                <NavLink
-                    to="/order-history"
-                    className={({ isActive }) =>
-                        isActive ? `${styles.link} ${styles.active}` : styles.link
-                    }
-                >
-                    Order History
-                </NavLink>
-
-
+                {isAuthenticated &&
+                    <NavLink
+                        to="/"
+                        className={({ isActive }) =>
+                            isActive ? `${styles.link} ${styles.active}` : styles.link
+                        }
+                    >
+                        Home
+                    </NavLink>}
+                {isAuthenticated &&
+                    <NavLink
+                        to="/order-history"
+                        className={({ isActive }) =>
+                            isActive ? `${styles.link} ${styles.active}` : styles.link
+                        }
+                    >
+                        Order History
+                    </NavLink>
+                }
                 {!isAuthenticated && (
                     <NavLink
                         to="/login"

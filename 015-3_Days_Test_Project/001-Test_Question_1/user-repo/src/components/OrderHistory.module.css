@@ -11,4 +11,5 @@
 .noOrders {
     color: #555;
     font-size: 18px;
+    text-align: center; /* Center the no orders message */
 }

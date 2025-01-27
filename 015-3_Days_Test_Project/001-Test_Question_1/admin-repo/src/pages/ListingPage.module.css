@@ -1,24 +1,41 @@
+/* Listing Page Styles */
 .listingPage {
     padding: 20px;
     background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+/* Page Heading */
 .pageHeading {
     font-size: 2rem;
     color: #1f2937;
     margin-bottom: 1.5rem;
     text-align: center;
 }
+
+/* Add Button */
 .addButton {
     background-color: #007bff;
     border: none;
     margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.listingList {
+/* Listings Grid */
+.listingGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    gap: 20px; /* Gap between the listings */
+    max-width: 1200px; /* Center the grid container */
+    width: 100%; /* Take full width up to 1200px */
     margin-top: 20px;
 }
 
+/* Listing Item Styles */
 .listingItem {
     display: flex;
     justify-content: space-between;
@@ -26,21 +43,35 @@
     padding: 15px;
     border: 1px solid #ddd;
     margin-bottom: 10px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Listing Text */
 .listingText {
     flex: 1;
 }
 
+/* Listing Actions */
 .listingActions {
     display: flex;
     gap: 10px;
 }
 
+/* Edit Button */
 .editButton {
     background-color: #28a745;
 }
 
+/* Delete Button */
 .deleteButton {
     background-color: #dc3545;
+}
+
+/* Responsive: Stack Listings on Small Screens */
+@media (max-width: 768px) {
+    .listingGrid {
+        grid-template-columns: 1fr; /* Single column on smaller screens */
+    }
 }

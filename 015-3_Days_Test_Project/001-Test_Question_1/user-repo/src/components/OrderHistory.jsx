@@ -1,4 +1,3 @@
-// OrderHistory.js
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import OrderHistoryItem from "./OrderHistoryItem";
@@ -43,7 +42,9 @@ const OrderHistory = () => {
 
     return (
         <Container className={styles.orderHistoryContainer}>
-            <h2 className={styles.header}>Your Booking History</h2>
+            <h2 className={styles.header}>
+                Your Booking History ({orderHistory.length})
+            </h2>
             {loading ? (
                 <p className={styles.loading}>Loading your bookings...</p>
             ) : error ? (

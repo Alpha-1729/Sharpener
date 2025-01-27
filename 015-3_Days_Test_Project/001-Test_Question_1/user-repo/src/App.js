@@ -19,16 +19,18 @@ function App() {
   return (
     <Fragment>
       <NavBar />
-      <Routes>
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/" exact element={<HomePage />} />
-        <Route path="/sign-up" element={<SignUpForm />} />
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/category" element={<CategoryPage />} />
-        <Route path="/order-history" element={<OrderHistory />} />
-      </Routes>
-      <Footer />
-    </Fragment>
+      <div className="main-content">
+        <Routes>
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/" exact element={<HomePage />} />
+          <Route path="/sign-up" element={<SignUpForm />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/category" element={<CategoryPage />} />
+          <Route path="/order-history" element={<OrderHistory />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Fragment >
   );
 }
 

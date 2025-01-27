@@ -1,7 +1,9 @@
 .categoryPage {
-    padding: 2rem;
-    max-width: 900px;
-    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    /* display: flex */
+    flex-direction: column;
+    align-items: center;
 }
 
 .pageHeading {

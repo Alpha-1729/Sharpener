@@ -41,7 +41,7 @@ function LoginForm() {
             })
         );
 
-        navigate("/home");
+        navigate("/category");
     };
 
     return (
