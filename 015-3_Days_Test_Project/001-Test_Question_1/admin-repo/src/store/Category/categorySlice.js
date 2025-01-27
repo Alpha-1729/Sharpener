@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    categories: []
+    categories: [],
 };
 
 const categorySlice = createSlice({
@@ -15,16 +15,16 @@ const categorySlice = createSlice({
             state.categories.push(action.payload);
         },
         editCategory(state, action) {
-            const { id, name } = action.payload;
-            const category = state.categories.find((cat) => cat.id === id);
-            if (category) {
-                category.name = name;
+            const { id, name, url } = action.payload;
+            const index = state.categories.findIndex((cat) => cat.id === id);
+            if (index !== -1) {
+                state.categories[index] = { ...state.categories[index], name, url };
             }
         },
         deleteCategory(state, action) {
             state.categories = state.categories.filter((cat) => cat.id !== action.payload);
-        }
-    }
+        },
+    },
 });
 
 export const categoryActions = categorySlice.actions;

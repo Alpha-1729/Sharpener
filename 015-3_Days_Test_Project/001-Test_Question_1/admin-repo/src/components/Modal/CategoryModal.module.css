@@ -66,46 +66,15 @@ input[type="text"]:focus {
     box-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
 }
 
-button[type="submit"] {
-    padding: 0.6rem 1.5rem;
-    border-radius: 8px;
-}
-
-button.variant-primary {
-    background-color: #4caf50;
-    border-color: #4caf50;
-    color: white;
-}
-
-button.variant-primary:hover {
-    background-color: #388e3c;
-    border-color: #388e3c;
-}
-
-button.variant-secondary {
-    background-color: #f3f4f6;
-    border-color: #f3f4f6;
-    color: #1f2937;
-}
-
-button.variant-secondary:hover {
-    background-color: #e0e0e0;
-    border-color: #e0e0e0;
-}
-
-input[type="text"]:invalid {
-    border-color: #f87171;
-}
-
-input[type="text"]:invalid:focus {
-    border-color: #f87171;
-    box-shadow: 0 0 5px rgba(248, 113, 113, 0.4);
-}
-
-.invalid-feedback {
-    display: block;
-    color: #f87171;
+.uploadingText {
+    color: #4caf50;
     font-size: 0.875rem;
+    margin-top: 0.5rem;
+    display: block;
+}
+
+.error {
+    color: red;
 }
 
 .imagePreview {
@@ -113,8 +82,4 @@ input[type="text"]:invalid:focus {
     max-height: 150px;
     object-fit: cover;
     margin-top: 10px;
-}
-
-.uploadError {
-    color: red;
 }

@@ -1,49 +1,54 @@
 import { useState } from "react";
 
-const useImageUpload = (file) => {
-    const [uploading, setUploading] = useState(false);
-    const [error, setError] = useState(null);
-    const [uploadedImageUrl, setUploadedImageUrl] = useState(null);
+const useImageUpload = () => {
+    const [isUploading, setIsUploading] = useState(false);
+    const [uploadError, setUploadError] = useState(null);
+    const [uploadedImageUrls, setUploadedImageUrls] = useState([]);
 
-    const uploadImage = async (file) => {
-        setUploading(true);
-        setError(null);
-        setUploadedImageUrl(null);
+    const uploadImages = async (files) => {
+        setIsUploading(true);
+        setUploadError(null);
+        setUploadedImageUrls([]);
 
         try {
-            const data = new FormData();
-            data.append("file", file);
-            data.append("upload_preset", "category");
-            data.append("cloud_name", "deltastar");
+            const uploadedUrls = [];
 
-            const response = await fetch(
-                "https://api.cloudinary.com/v1_1/deltastar/image/upload",
-                {
-                    method: "POST",
-                    body: data,
+            for (const file of files) {
+                const data = new FormData();
+                data.append("file", file);
+                data.append("upload_preset", "category");
+                data.append("cloud_name", "deltastar");
+
+                const response = await fetch(
+                    "https://api.cloudinary.com/v1_1/deltastar/image/upload",
+                    {
+                        method: "POST",
+                        body: data,
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error("Image upload failed for one or more files.");
                 }
-            );
 
-            if (!response.ok) {
-                throw new Error("Image upload failed. Please try again.");
+                const result = await response.json();
+                console.log(result);
+                uploadedUrls.push(result.url);
             }
 
-            const result = await response.json();
-            setUploadedImageUrl(result.url);
-            return { url: result.url, error: null };
+            setUploadedImageUrls(uploadedUrls);
         } catch (err) {
-            setError(err.message || "An unexpected error occurred.");
-            return { url: null, error: err.message };
+            setUploadError(err.message || "An unexpected error occurred.");
         } finally {
-            setUploading(false);
+            setIsUploading(false);
         }
     };
 
     return {
-        uploading,
-        error,
-        uploadedImageUrl,
-        uploadImage,
+        isUploading,
+        uploadError,
+        uploadedImageUrls,
+        uploadImages,
     };
 };
 

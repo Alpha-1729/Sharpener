@@ -1,0 +1,14 @@
+.previewContainer {
+    margin-top: 10px;
+}
+
+.previewLink {
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.previewLink:hover {
+    text-decoration: underline;
+}
