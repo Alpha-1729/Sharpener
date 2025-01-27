@@ -95,7 +95,7 @@ function CategoryModal({ showModal, handleClose, isEditing, currentCategory }) {
                             onChange={handleImageChange}
                             accept="image/*"
                         />
-                        {imagePreview && !isUploading && <ImagePreview imgUrl={imagePreview} />}
+                        {imagePreview && !isUploading && <ImagePreview imgUrls={[imagePreview]} />}
                         {isUploading && <small className={styles.uploadingText}>Uploading...</small>}
                         {error && <small className={styles.error}>{error}</small>}
                     </Form.Group>

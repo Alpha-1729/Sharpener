@@ -5,10 +5,10 @@
 
 .pageHeading {
     font-size: 2rem;
-    color: #333;
-    margin-bottom: 20px;
+    color: #1f2937;
+    margin-bottom: 1.5rem;
+    text-align: center;
 }
-
 .addButton {
     background-color: #007bff;
     border: none;

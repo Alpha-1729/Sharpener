@@ -18,7 +18,7 @@ export const fetchAllListings = async () => {
                 toDate: listing.toDate,
                 description: listing.description,
                 isAvailable: listing.isAvailable,
-                imageUrl: listing.imageUrl
+                imageUrls: listing.imageUrls
             }));
             return { response: listings, error: null };
         }
@@ -33,16 +33,16 @@ export const addListing = async (listing) => {
         const newListingRef = push(ref(database, "listings"));
         await set(newListingRef, {
             category: listing.category,
+            fromDate: listing.fromDate,
+            toDate: listing.toDate,
             placeName: listing.placeName,
             pricePerNight: listing.pricePerNight,
             address: listing.address,
             city: listing.city,
             pincode: listing.pincode,
-            fromDate: listing.fromDate,
-            toDate: listing.toDate,
             description: listing.description,
             isAvailable: listing.isAvailable,
-            imageUrl: listing.imageUrl
+            imageUrls: listing.imageUrls
         });
         return { response: { id: newListingRef.key, ...listing }, error: null };
     } catch (err) {
@@ -54,16 +54,16 @@ export const editListing = async (listing) => {
     try {
         await update(ref(database, `listings/${listing.id}`), {
             category: listing.category,
+            fromDate: listing.fromDate,
+            toDate: listing.toDate,
             placeName: listing.placeName,
             pricePerNight: listing.pricePerNight,
             address: listing.address,
             city: listing.city,
             pincode: listing.pincode,
-            fromDate: listing.fromDate,
-            toDate: listing.toDate,
             description: listing.description,
             isAvailable: listing.isAvailable,
-            imageUrl: listing.imageUrl
+            imageUrls: listing.imageUrls
         });
         return { response: listing, error: null };
     } catch (err) {

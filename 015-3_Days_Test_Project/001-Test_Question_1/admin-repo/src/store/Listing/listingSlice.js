@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    listings: [
-    ], // Default listing objects
+    listings: [], // Default listing objects
 };
 
 const listingSlice = createSlice({

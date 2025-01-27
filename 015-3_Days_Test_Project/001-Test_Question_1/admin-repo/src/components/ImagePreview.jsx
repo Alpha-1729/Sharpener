@@ -1,14 +1,21 @@
 import React from "react";
 import styles from "./ImagePreview.module.css";
 
-function ImagePreview({ imgUrl }) {
-    const imageBaseName = imgUrl.split('/').pop();
-
+function ImagePreview({ imgUrls }) {
     return (
         <div className={styles.previewContainer}>
-            <a href={imgUrl} target="_blank" rel="noopener noreferrer" className={styles.previewLink}>
-                {imageBaseName}
-            </a>
+            {imgUrls && imgUrls.length > 0 &&
+                imgUrls.map((imgUrl, index) => {
+                    const imageBaseName = imgUrl.split('/').pop();
+                    return (
+                        <div key={index} className={styles.previewItem}>
+                            <a href={imgUrl} target="_blank" rel="noopener noreferrer" className={styles.previewLink}>
+                                {imageBaseName}
+                            </a>
+                        </div>
+                    );
+                })
+            }
         </div>
     );
 }
